@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>GeoStriker.com</title>
+	<title>OreGrader.com</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="/static/assets/css/main.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -11,9 +11,9 @@
 	<div class="wrapper">
 		<section class="about">
 			<div class="header">
-				<h1>GeoStriker</h1>
+				<h1>OreGrader</h1>
 				<hr/>
-				<h2>Strike Dip Calculator from XYZ Points</h2>
+				<h2>Drill Hole Grade Compositor</h2>
 				</div>
 			<div class="menu">
 				<p></p>
@@ -26,19 +26,19 @@
 				<div class="col-1">
 		      <h3>What is this?</h3>
 					<hr />
-					<p>It's essentially a more accurate way of doing three point problems to calculate <a href="https://en.wikipedia.org/wiki/Strike_and_dip">strike and dip</a>.  This method uses linear algebra to calculate the best fit plane to many XYZ points.  See this <a href="/static/assets/pdf/MathExplanation.pdf">write up</a> by Phillip McFarland for more details.</p>
+					<p>This is a calculator that computes the longest runs possible over a certain grade % from drill hole assay data.</p>
 				</div>
 				<div class="col-1">
 					<h3>How is this useful?</h3>
 					<hr />
-					<p>Some possible uses are geologic mapping with satellite images, seismic fault interpretation, and water table determination.  Use your head and think of other applications.  I'm not your mom.</p>
+					<p>Basically, I made this to make my life easier at work.  I don't know if it has application for you.  Use your head and think of other applications.  I'm not your mom.</p>
 				</div>
 				<div class="col-1">
 					<h3>Assumptions</h3>
 					<hr />
-					<p>This calculator assumes the surface can be approximated by a linear plane. If it cannot, break up the segments of the surface that you believe are linear planes and insert them separately.</p>
+					<p>Currently, it assumes the cut off grade is 3%, but I'm going to make this a user input later.</p>
 					<br />
-					<p>This calculator only works with projected coordinates and where all three dimensions are in the same units.</p>
+					<p>Data must be in consecutive order and complete.  I'll work on fixing this in the future.</p>
 			</div>
 		</div>
 		<div class="col-head">
@@ -47,14 +47,11 @@
 		</div>
 		<div class="col-full">
 			<div class="col-1">
-				<p>Thanks to <b>Phillip McFarland</b> for his mathematical explanations.  Special thanks to <b>Matthew Lenz</b> for all his programming support and putting up with my stupidity.</p>
-			</div>
-			<div class="col-1">
-				<p>This program was created in response to:<br />1. Being annoyed that this didn't already exist<br />2. Wanting to learn to program.  This is my first program.  Cut me some slack.</p>
+				<p>Special thanks to <b>Matthew Lenz</b> for getting me started in programming.</p>
 			</div>
 		</div>
 		<div class="col-full">
-				<div class="mcdougavational"></div>
+				<div class="youbreccia"></div>
 				<div class="pythonpro"></div>
 		</div>
 		</section></div>
