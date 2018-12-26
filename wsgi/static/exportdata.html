@@ -1,0 +1,39 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>DrillHoleCompositor.com</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="/static/assets/css/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+<body>
+	<div class="wrapper">
+		<section class="exportdata">
+			<div class="header">
+				<h1>Drill Hole Compositor</h1>
+				<hr/>
+				<h2>by Noah McDougall</h2>
+				</div>
+			<div class="menu">
+				<p></p>
+				<a href='/'>Home</a>
+				<a href='/static/assets/pdf/Guide.pdf'>Guide</a>
+				<a href='/static/about.html'>About</a>
+				<p></p>
+				</div>
+			<div class="body">
+				<div class="col-1">
+          <table border=1>
+          <tr><th>HoleID</th><th>From</th><th>To</th><th>Run Length</th><th>Grade %</th></tr>
+          {% for item in answers %}
+          <tr><td>{{ item.Holeid }}</td><td>{{ item.From }}</td><td>{{ item.To }}</td><td>{{ item.RunLength }}</td><td>{{ item.Grade% }}</td></tr>
+          {% endfor %}
+          </table>
+        </div>
+		</section></div>
+	<div class="footer">
+		<a href="mailto:noah.mcdougall@gmail.com">noah.mcdougall@gmail.com</a>
+	</div>
+</body>
+</html>
