@@ -596,7 +596,7 @@ section.about {
   height: 20vw;
   width: 100%;
   background-repeat: no-repeat;
-  background-image: url(/static/assets/img/newbackground.jpg);
+  background-image: url(/static/assets/img/newbackground2.jpg);
   background-position: center;
   background-size: cover;
   display: -webkit-box;
@@ -638,11 +638,11 @@ section.about {
   weight: 400;
   text-align: center; }
 
-.XYZImage {
+.corepiece {
   height: 20vw;
   min-height: 150px;
   background-repeat: no-repeat;
-  background-image: url(/static/assets/img/logo.png);
+  background-image: url(/static/assets/img/corepiece.jpg);
   background-position: center;
   background-size: contain; }
 
