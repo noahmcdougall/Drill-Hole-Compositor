@@ -34,7 +34,8 @@ class calculate:
         return tmpl.render()
 
     ## Listing variables up here that would later be user input ##
-    global cutoffgrade = 3
+    cutoffgrade = 3
+    cherrypy.session['cutoffgrade'] = cutoffgrade
 
     ## Initial loading of data from csv ##
     @cherrypy.expose
