@@ -49,6 +49,7 @@ for i in holes:
                 ## Once at the end of the run, it goes back to check if adding the row prior to the run (as long as it's greater than 0%) keeps the entire run above grade) ##
                 if iteratornum >= 0 and datatable[iteratornum][3] > 0 and ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)>=cutoffgrade:
                     grade = ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)
+                    beginning = datatable[iteratornum][1]
                     runlength = runlength + gobacklength
                 results.append((i, beginning, end, runlength, round(grade,2)))
                 runlength = 0
