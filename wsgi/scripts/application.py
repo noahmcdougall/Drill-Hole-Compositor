@@ -1,8 +1,12 @@
+#!/usr/bin/env python
+import sys
+sys.stdout = sys.stderr
 import csv
 import os.path
 import cherrypy
 import jinja2
 import io
+import atexit
 
 ## Sessions enabled ##
 wsgi_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
