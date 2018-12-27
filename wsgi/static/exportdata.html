@@ -26,7 +26,7 @@
 				<div class="col-1">
           <table border=1>
           <tr><th>HoleID</th><th>From</th><th>To</th><th>Run Length</th><th>Grade %</th></tr>
-          {% for item in answers %}
+          {% for item in results %}
           <tr><td>{{ item.Holeid }}</td><td>{{ item.From }}</td><td>{{ item.To }}</td><td>{{ item.RunLength }}</td><td>{{ item.Grade }}</td></tr>
           {% endfor %}
           </table>
