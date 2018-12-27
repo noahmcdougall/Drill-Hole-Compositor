@@ -27,14 +27,15 @@ if cherrypy.__version__.startswith('3.') and cherrypy.engine.state == 0:
     cherrypy.engine.start(blocking=False)
     atexit.register(cherrypy.engine.stop)
 
+## Listing variables up here that would later be user input ##
+global cutoffgrade
+cutoffgrade = 3
+
 class calculate:
     @cherrypy.expose
     def index(self):
         tmpl = env.get_template('index.html')
         return tmpl.render()
-
-    ## Listing variables up here that would later be user input ##
-    cutoffgrade = 3
 
     ## Initial loading of data from csv ##
     @cherrypy.expose
