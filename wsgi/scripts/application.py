@@ -99,6 +99,6 @@ class calculate:
     @cherrypy.expose
     def displayprocesseddata(self):
         tmpl = env.get_template('exportdata.html')
-        return tmpl.render(results)
+        return tmpl.render(results = results)
 
 application = cherrypy.Application(calculate(), '/', conf)
