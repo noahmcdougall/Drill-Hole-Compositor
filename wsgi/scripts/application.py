@@ -81,7 +81,7 @@ class calculate:
                     ## Condition where we get to the end of the first run and commit the results ##
                     if ((datatable[j][3]*length)+gradeton)/(runlength + length)<cutoffgrade and inorout == "in":
                         ## Once at the end of the run, it goes back to check if adding the row prior to the run (as long as it's greater than 0%) keeps the entire run above grade) ##
-                        if iteratornum >= 0 and datatable[iteratornum][3] > 0 and ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)>=cutoffgrade:
+                        if datatable[iteratornum][0] == i and iteratornum >= 0 and datatable[iteratornum][3] > 0 and ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)>=cutoffgrade:
                             grade = ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)
                             beginning = datatable[iteratornum][1]
                             runlength = runlength + gobacklength
