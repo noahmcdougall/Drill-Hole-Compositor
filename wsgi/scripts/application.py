@@ -90,7 +90,7 @@ class calculate:
                         grade = 0
                         gradeton = 0
                         inorout = "out"
-        cherrypy.session['processeddata'] = results
+                        cherrypy.session['processeddata'] = results
 
         raise cherrypy.HTTPRedirect("/displayprocesseddata")
 
