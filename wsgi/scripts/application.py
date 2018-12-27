@@ -93,10 +93,10 @@ class calculate:
 
         raise cherrypy.HTTPRedirect("/displayprocesseddata")
 
-        ## Displays table of data ##
-        @cherrypy.expose
-        def displayprocesseddata(self):
-            tmpl = env.get_template('exportdata.html')
-            return tmpl.render(results = cherrypy.session['processeddata'])
+    ## Displays table of data ##
+    @cherrypy.expose
+    def displayprocesseddata(self):
+        tmpl = env.get_template('exportdata.html')
+        return tmpl.render(results = cherrypy.session['processeddata'])
 
-    application = cherrypy.Application(calculate(), '/', conf)
+application = cherrypy.Application(calculate(), '/', conf)
