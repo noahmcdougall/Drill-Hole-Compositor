@@ -85,7 +85,7 @@ class calculate:
                         if iteratornum >= 0 and datatable[iteratornum][3] > 0 and ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)>=cutoffgrade:
                             grade = ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)
                             runlength = runlength + gobacklength
-                        results.append({'Holeid' : i, 'From' : beginning, 'To' : end, 'RunLength' : runlength, 'Grade%' : round(grade,2)})
+                        results.append({'Holeid' : i, 'From' : beginning, 'To' : end, 'RunLength' : runlength, 'Grade' : round(grade,2)})
                         runlength = 0
                         grade = 0
                         gradeton = 0
