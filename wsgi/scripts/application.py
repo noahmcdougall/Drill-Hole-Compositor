@@ -100,4 +100,4 @@ class calculate:
         tmpl = env.get_template('exportdata.html')
         return tmpl.render(results = cherrypy.session['processeddata'])
 
-    application = cherrypy.Application(calculate(), '/', conf)
+application = cherrypy.Application(calculate(), '/', conf)
