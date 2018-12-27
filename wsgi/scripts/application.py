@@ -31,8 +31,6 @@ if cherrypy.__version__.startswith('3.') and cherrypy.engine.state == 0:
 global cutoffgrade
 cutoffgrade = 3
 
-global results
-
 class calculate:
     @cherrypy.expose
     def index(self):
@@ -92,6 +90,7 @@ class calculate:
                         grade = 0
                         gradeton = 0
                         inorout = "out"
+        cherrypy.session['processeddata'] = results
 
         raise cherrypy.HTTPRedirect("/displayprocesseddata")
 
@@ -99,6 +98,6 @@ class calculate:
     @cherrypy.expose
     def displayprocesseddata(self):
         tmpl = env.get_template('exportdata.html')
-        return tmpl.render(results)
+        return tmpl.render(results = cherrypy.session['processeddata'])
 
 application = cherrypy.Application(calculate(), '/', conf)
