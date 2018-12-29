@@ -5,6 +5,10 @@ import os.path
 cutoffgrade = 3
 mingradecutoff = 0.5
 
+## People may not understand how to use this and mess this up ##
+if mingradecutoff > cutoffgrade:
+    print("Error: The minimum grade cut off cannot be larger than the cut off grade.  See the guide for details on how to set up the calculator.")
+
 ## Initial loading of data from csv ##
 with open('C:/Users/noahm/Desktop/compositorinputdata2.csv', 'rt') as datalist:
     reader = csv.reader(datalist, delimiter=",")

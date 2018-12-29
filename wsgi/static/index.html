@@ -26,6 +26,11 @@
 				<div class="col-1">
 		      <p>Add a csv file to composite drillholes for anything greater than 3%.  See guide for setting up the input data.</p>
 					<hr />
+	        <label><b>Cut Off Grade:</b></label>
+	        <input type="text" placeholder="Enter cut off grade" name="cutoffgrade" required>
+
+	        <label><b>Minimum Grade Cut Off:</b></label>
+	        <input type="text" placeholder="Enter minimum grade cut off" name="minimumgradecutoff" required>
 					<form action="processdata" method="post" enctype="multipart/form-data">
 		      	CSV File Name: <input type="file" name="myFile" /><br /><br />
 		      	<input type="submit" />
