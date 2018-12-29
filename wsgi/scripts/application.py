@@ -30,6 +30,7 @@ if cherrypy.__version__.startswith('3.') and cherrypy.engine.state == 0:
 ## Listing variables up here that would later be user input ##
 global cutoffgrade
 global mingradecutoff
+mingradecutoff = 0.5
 
 class calculate:
     @cherrypy.expose
