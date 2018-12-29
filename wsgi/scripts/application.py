@@ -51,6 +51,7 @@ class calculate:
 
         ## Sorts the data by hole and sets the initial parameters#
         results = []
+        problemholes = []
         for i in holes:
             inorout = "out"
             grade = 0
@@ -66,6 +67,10 @@ class calculate:
                 if datatable[j][0] == i:
                     length = datatable[j][2]-datatable[j][1]
                     gobacklength = datatable[iteratornum][2]-datatable[iteratornum][1]
+
+                    ## Quick data QC to make sure rows are all consecutive with no gaps ##
+                    if datatable[j-1][0] == i and datatable[j][1] != datatable[j-1][2] and datatable[j][0] not in problemholes:
+                        problemholes.append(datatable[j][0])
 
                     ## Condition where we start into the first run ##
                     if ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade:

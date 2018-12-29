@@ -5,7 +5,7 @@ import os.path
 cutoffgrade = 3
 
 ## Initial loading of data from csv ##
-with open('C:/Users/noahm/Desktop/compositorinputdata5.csv', 'rt') as datalist:
+with open('C:/Users/noahm/Desktop/compositorinputdata2.csv', 'rt') as datalist:
     reader = csv.reader(datalist, delimiter=",")
     holes = []
     datatable = []
@@ -17,6 +17,7 @@ with open('C:/Users/noahm/Desktop/compositorinputdata5.csv', 'rt') as datalist:
 
 ## Sorts the data by hole and sets the initial parameters#
 results = []
+problemholes = []
 for i in holes:
     inorout = "out"
     grade = 0
@@ -30,6 +31,11 @@ for i in holes:
     ## Iterates through the rows only where the hole ID matches ##
     for j in range(0, len(datatable)):
         if datatable[j][0] == i:
+            ## Quick data QC to make sure rows are all consecutive with no gaps ##
+            if datatable[j-1][0] == i and datatable[j][1] != datatable[j-1][2] and datatable[j][0] not in problemholes:
+                problemholes.append(datatable[j][0])
+
+
             length = datatable[j][2]-datatable[j][1]
             gobacklength = datatable[iteratornum][2]-datatable[iteratornum][1]
 
@@ -58,3 +64,4 @@ for i in holes:
                 inorout = "out"
 
 print(results)
+print(problemholes)
