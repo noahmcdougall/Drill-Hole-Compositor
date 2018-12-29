@@ -37,13 +37,16 @@ class calculate:
         tmpl = env.get_template('index.html')
         return tmpl.render()
 
+    @cherrypy.expose
+    def userinput(self, mingradecutoffin, cutoffgradein):
+        cutoffgrade = float(cutoffgradein)
+        mingradecutoff = float(mingradecutoffin)    
+
     ## Initial loading of data from csv ##
     @cherrypy.expose
-    def processdata(self, myFile, mincutoffgradein, cutoffgradein):
+    def processdata(self, myFile, mingradecutoffin, cutoffgradein):
         holes = []
         datatable = []
-        cutoffgrade = float(cutoffgradein)
-        mincutoffgrade = float(mincutoffgradein)
         reader = csv.reader(myFile.file)
         next(reader)
         for row in reader:
