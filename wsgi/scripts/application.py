@@ -40,8 +40,8 @@ class calculate:
     ## Pulling in user inputs ##
     @cherrypy.expose
     def userinput(self, cutoffgradein, mincutoffgradein):
-        cutoffgrade = float(cutoffgradein)
-        mincutoffgrade = float(mincutoffgradein)
+        cutoffgrade = float(request.form['cutoffgradein'])
+        mincutoffgrade = float(request.form['mincutoffgradein'])
 
     ## Initial loading of data from csv ##
     @cherrypy.expose
