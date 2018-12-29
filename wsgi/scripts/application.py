@@ -46,7 +46,7 @@ class calculate:
     ## Initial loading of data from csv ##
     @cherrypy.expose
     def processdata(self, myFile):
-        userinput()
+        userinput(mingradecutoffin, cutoffgradein)
         holes = []
         datatable = []
         reader = csv.reader(myFile.file)
