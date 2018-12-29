@@ -30,7 +30,6 @@ if cherrypy.__version__.startswith('3.') and cherrypy.engine.state == 0:
 ## Listing variables up here that would later be user input ##
 global cutoffgrade
 global mingradecutoff
-mingradecutoff = 0.5
 
 class calculate:
     @cherrypy.expose
@@ -38,6 +37,7 @@ class calculate:
         tmpl = env.get_template('index.html')
         return tmpl.render()
 
+    ## User inputs ##
     @cherrypy.expose
     def userinput(self, mingradecutoffin, cutoffgradein):
         cutoffgrade = float(cutoffgradein)
@@ -46,6 +46,7 @@ class calculate:
     ## Initial loading of data from csv ##
     @cherrypy.expose
     def processdata(self, myFile):
+        userinput()
         holes = []
         datatable = []
         reader = csv.reader(myFile.file)
