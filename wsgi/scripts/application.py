@@ -29,9 +29,7 @@ if cherrypy.__version__.startswith('3.') and cherrypy.engine.state == 0:
 
 ## Listing variables up here that would later be user input ##
 global cutoffgrade
-cutoffgrade = 3
 global mingradecutoff
-mingradecutoff = 0.5
 
 class calculate:
     @cherrypy.expose
@@ -41,15 +39,19 @@ class calculate:
 
     ## Initial loading of data from csv ##
     @cherrypy.expose
-    def processdata(self, myFile):
+    def processdata(self, myFile, cutoffgradein, mincutoffgradein):
         holes = []
         datatable = []
+        cutoffgrade = cutoffgradein
+        mincutoffgrade = mincutoffgradein
         reader = csv.reader(myFile.file)
         next(reader)
         for row in reader:
             if row[0] not in holes:
                 holes.append(row[0])
             datatable.append([row[0],float(row[1]),float(row[2]),float(row[3])])
+
+
 
         ## Sorts the data by hole and sets the initial parameters#
         results = []
