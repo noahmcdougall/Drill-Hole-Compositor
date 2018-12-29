@@ -39,10 +39,9 @@ class calculate:
 
     ## Pulling in user inputs ##
     @cherrypy.expose
-    def userinput():
-        if request.method == 'post':
-            cutoffgrade = float(request.form['cutoffgradein'])
-            mincutoffgrade = float(request.form['mincutoffgradein'])
+    def userinput(self, cutoffgradein, mincutoffgradein):
+        cutoffgrade = float(request.form['cutoffgradein'])
+        mincutoffgrade = float(request.form['mincutoffgradein'])
 
     ## Initial loading of data from csv ##
     @cherrypy.expose
