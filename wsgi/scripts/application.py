@@ -37,17 +37,13 @@ class calculate:
         tmpl = env.get_template('index.html')
         return tmpl.render()
 
-    ## Pulling in user inputs ##
-    @cherrypy.expose
-    def userinput(self, cutoffgradein, mincutoffgradein):
-        cutoffgrade = float(cutoffgradein)
-        mincutoffgrade = float(mincutoffgradein)
-
     ## Initial loading of data from csv ##
     @cherrypy.expose
-    def processdata(self, myFile):
+    def processdata(self, myFile, mincutoffgradein, cutoffgradein):
         holes = []
         datatable = []
+        cutoffgrade = float(cutoffgradein)
+        mincutoffgrade = float(mincutoffgradein)
         reader = csv.reader(myFile.file)
         next(reader)
         for row in reader:
@@ -55,9 +51,7 @@ class calculate:
                 holes.append(row[0])
             datatable.append([row[0],float(row[1]),float(row[2]),float(row[3])])
 
-
-
-        ## Sorts the data by hole and sets the initial parameters#
+        ## Sorts the data by hole and sets the initial parameters ##
         results = []
         problemholes = []
         for i in holes:
