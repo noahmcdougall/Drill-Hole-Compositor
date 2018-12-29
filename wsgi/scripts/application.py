@@ -30,6 +30,8 @@ if cherrypy.__version__.startswith('3.') and cherrypy.engine.state == 0:
 ## Listing variables up here that would later be user input ##
 global cutoffgrade
 cutoffgrade = 3
+global mingradecutoff
+mingradecutoff = 0.5
 
 class calculate:
     @cherrypy.expose
@@ -73,7 +75,8 @@ class calculate:
                         problemholes.append(datatable[j][0])
 
                     ## Condition where we start into the first run ##
-                    if ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade:
+                    ## First one is the case where grade is higher than min cut off ##
+                    if datatable[j][3] >= mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade:
                         grade = ((datatable[j][3]*length)+gradeton)/(runlength + length)
                         runlength = runlength + length
                         gradeton = grade * runlength
@@ -82,11 +85,21 @@ class calculate:
                             iteratornum = j-1
                         end = datatable[j][2]
                         inorout = "in"
+                    ## If the row is below min cut off, check to see if either of the the next two rows are above before diluting the composite ##
+                    elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade:
+                        if (datatable[j+1][0] == i and datatable[j+1][3] > mingradecutoff) or (datatable[j+2][0] == i and datatable[j+2][3] > mingradecutoff):
+                            grade = ((datatable[j][3]*length)+gradeton)/(runlength + length)
+                            gradeton = grade * runlength
+                            if inorout == "out":
+                                beginning = datatable[j][1]
+                                iteratornum = j-1
+                            end = datatable[j][2]
+                            inorout = "in"
 
                     ## Condition where we get to the end of the first run and commit the results ##
                     if ((datatable[j][3]*length)+gradeton)/(runlength + length)<cutoffgrade and inorout == "in":
-                        ## Once at the end of the run, it goes back to check if adding the row prior to the run (as long as it's greater than 0%) keeps the entire run above grade) ##
-                        if datatable[iteratornum][0] == i and iteratornum >= 0 and datatable[iteratornum][3] > 0 and ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)>=cutoffgrade:
+                        ## Once at the end of the run, it goes back to check if adding the row prior to the run (as long as it's greater than mingradecutoff) keeps the entire run above grade) ##
+                        if datatable[iteratornum][0] == i and iteratornum >= 0 and datatable[iteratornum][3] >= mingradecutoff and ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)>=cutoffgrade:
                             grade = ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)
                             beginning = datatable[iteratornum][1]
                             runlength = runlength + gobacklength
