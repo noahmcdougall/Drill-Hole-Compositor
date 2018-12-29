@@ -40,11 +40,11 @@ class calculate:
     @cherrypy.expose
     def userinput(self, mingradecutoffin, cutoffgradein):
         cutoffgrade = float(cutoffgradein)
-        mingradecutoff = float(mingradecutoffin)    
+        mingradecutoff = float(mingradecutoffin)
 
     ## Initial loading of data from csv ##
     @cherrypy.expose
-    def processdata(self, myFile, mingradecutoffin, cutoffgradein):
+    def processdata(self, myFile):
         holes = []
         datatable = []
         reader = csv.reader(myFile.file)
