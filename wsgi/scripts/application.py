@@ -92,8 +92,8 @@ class calculate:
                         end = datatable[j][2]
                         inorout = "in"
                     ## If the row is below min cut off, check to see if either of the the next two rows are above before diluting the composite ##
-                    elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade:
-                        if (datatable[j+1][0] == i and datatable[j+1][3] > mingradecutoff) or (datatable[j+2][0] == i and datatable[j+2][3] > mingradecutoff):
+                elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade:
+                        if ((j+1) <= len(datatable) and datatable[j+1][0] == i and datatable[j+1][3] > mingradecutoff) or ((j+2) <= len(datatable) and datatable[j+2][0] == i and datatable[j+2][3] > mingradecutoff):
                             grade = ((datatable[j][3]*length)+gradeton)/(runlength + length)
                             gradeton = grade * runlength
                             if inorout == "out":
