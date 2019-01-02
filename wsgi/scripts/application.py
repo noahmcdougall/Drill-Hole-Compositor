@@ -67,9 +67,24 @@ class calculate:
             beginning = 0
             end = 0
             iteratornum = 0
+            jplusone = 0
+            jplustwo = 0
 
             ## Iterates through the rows only where the hole ID matches ##
             for j in range(0, len(datatable)):
+                ## Unsophisticated way of getting around the iteration problem at the end of the data ##
+                if j+1 > len(datatable)-1:
+                    jplusone = j
+                else:
+                    jplusone = j+1
+                if j+2 > len(datatable)-1 and j+1 == len(datatable)-1:
+                    jplustwo = j+1
+                elif j+1 > len(datatable)-1:
+                    jplustwo = j
+                else:
+                    jplustwo = j+2
+                print(jplustwo)
+
                 if datatable[j][0] == i:
                     length = datatable[j][2]-datatable[j][1]
                     gobacklength = datatable[iteratornum][2]-datatable[iteratornum][1]
@@ -92,14 +107,14 @@ class calculate:
                         inorout = "in"
                     ## If the row is below min cut off, check to see if either of the the next two rows are above before diluting the composite ##
                     elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade and inorout == "in":
-                        if (datatable[j+1][0] == i and datatable[j+1][3] > mingradecutoff) or (datatable[j+2][0] == i and datatable[j+2][3] > mingradecutoff):
+                        if (datatable[jplusone][0] == i and datatable[jplusone][3] > mingradecutoff) or (datatable[jplustwo][0] == i and datatable[jplustwo][3] > mingradecutoff):
                             grade = ((datatable[j][3]*length)+gradeton)/(runlength + length)
                             gradeton = grade * runlength
                             end = datatable[j][2]
 
                     ## Closing run conditions ##
                     ## Condition where the hole ends 'in' ore. ##
-                    if ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade and inorout == "in" and (datatable[j+1][0] != i):
+                    if ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade and inorout == "in" and (datatable[jplusone][0] != i):
                         results.append({'Holeid' : i, 'From' : beginning, 'To' : end, 'RunLength' : runlength, 'Grade' : round(grade,2)})
                         runlength = 0
                         grade = 0
