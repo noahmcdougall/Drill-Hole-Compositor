@@ -36,12 +36,12 @@ for i in holes:
     ## Iterates through the rows only where the hole ID matches ##
     for j in range(0, len(datatable)):
         if datatable[j][0] == i:
+            length = datatable[j][2]-datatable[j][1]
+            gobacklength = datatable[iteratornum][2]-datatable[iteratornum][1]
+
             ## Quick data QC to make sure rows are all consecutive with no gaps ##
             if datatable[j-1][0] == i and datatable[j][1] != datatable[j-1][2] and datatable[j][0] not in problemholes:
                 problemholes.append(datatable[j][0])
-
-            length = datatable[j][2]-datatable[j][1]
-            gobacklength = datatable[iteratornum][2]-datatable[iteratornum][1]
 
             ## Condition where we start into the first run ##
             ## First one is the case where grade is higher than min cut off ##
@@ -72,7 +72,7 @@ for i in holes:
                 inorout = "out"
             ## Condition where we get to the end of the first run and commit the results ##
             if ((datatable[j][3]*length)+gradeton)/(runlength + length)<cutoffgrade and inorout == "in":
-                ## Once at the end of the run, it goes back to check if adding the row prior to the run (as long as it's greater than mingradecutoff%) keeps the entire run above grade) ##
+                ## Once at the end of the run, it goes back to check if adding the row prior to the run (as long as it's greater than mingradecutoff) keeps the entire run above grade) ##
                 if datatable[iteratornum][0] == i and iteratornum >= 0 and datatable[iteratornum][3] >= mingradecutoff and ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)>=cutoffgrade:
                     grade = ((datatable[iteratornum][3]*gobacklength)+gradeton)/(runlength + gobacklength)
                     beginning = datatable[iteratornum][1]
