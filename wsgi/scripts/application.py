@@ -111,6 +111,12 @@ class calculate:
                             grade = ((datatable[j][3]*length)+gradeton)/(runlength + length)
                             gradeton = grade * runlength
                             end = datatable[j][2]
+                        else:
+                            results.append((i, beginning, end, runlength, round(grade,2)))
+                            runlength = 0
+                            grade = 0
+                            gradeton = 0
+                            inorout = "out"
 
                     ## Closing run conditions ##
                     ## Condition where the hole ends 'in' ore. ##
