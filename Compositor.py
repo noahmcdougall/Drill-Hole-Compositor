@@ -2,7 +2,7 @@ import csv
 import os.path
 
 ## Listing variables up here that would later be user input ##
-cutoffgrade = 1.0
+cutoffgrade = 1
 mingradecutoff = 0.5
 
 ## People may not understand how to use this and mess this up ##

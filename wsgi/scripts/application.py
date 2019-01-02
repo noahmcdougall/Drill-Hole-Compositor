@@ -113,7 +113,7 @@ class calculate:
                             gradeton = grade * runlength
                             end = datatable[j][2]
                         else:
-                            results.append((i, beginning, end, runlength, round(grade,2)))
+                            results.append({'Holeid' : i, 'From' : beginning, 'To' : end, 'RunLength' : runlength, 'Grade' : round(grade,2)})
                             runlength = 0
                             grade = 0
                             gradeton = 0
