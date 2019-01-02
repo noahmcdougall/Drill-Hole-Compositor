@@ -2,7 +2,7 @@ import csv
 import os.path
 
 ## Listing variables up here that would later be user input ##
-cutoffgrade = 3
+cutoffgrade = 3.0
 mingradecutoff = 0.5
 
 ## People may not understand how to use this and mess this up ##
@@ -10,7 +10,7 @@ if mingradecutoff > cutoffgrade:
     print("Error: The minimum grade cut off cannot be larger than the cut off grade.  See the guide for details on how to set up the calculator.")
 
 ## Initial loading of data from csv ##
-with open('C:/Users/noahm/Desktop/compositorinputdata2.csv', 'rt') as datalist:
+with open('C:/Users/Noah McDougall/Desktop/comp2.csv', 'rt') as datalist:
     reader = csv.reader(datalist, delimiter=",")
     holes = []
     datatable = []
@@ -52,20 +52,24 @@ for i in holes:
                 if inorout == "out":
                     beginning = datatable[j][1]
                     iteratornum = j-1
+                    gobacklength = datatable[iteratornum][2]-datatable[iteratornum][1]
                 end = datatable[j][2]
                 inorout = "in"
             ## If the row is below min cut off, check to see if either of the the next two rows are above before diluting the composite ##
-            elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade:
+            elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade and inorout == "in":
                 if (datatable[j+1][0] == i and datatable[j+1][3] > mingradecutoff) or (datatable[j+2][0] == i and datatable[j+2][3] > mingradecutoff):
                     grade = ((datatable[j][3]*length)+gradeton)/(runlength + length)
                     gradeton = grade * runlength
-                    if inorout == "out":
-                        beginning = datatable[j][1]
-                        iteratornum = j-1
                     end = datatable[j][2]
-                    inorout = "in"
 
-
+            ## Closing run conditions ##
+            ## Condition where the hole ends 'in' ore. ##
+            if ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade and inorout == "in" and (datatable[j+1][0] != i):
+                results.append((i, beginning, end, runlength, round(grade,2)))
+                runlength = 0
+                grade = 0
+                gradeton = 0
+                inorout = "out"
             ## Condition where we get to the end of the first run and commit the results ##
             if ((datatable[j][3]*length)+gradeton)/(runlength + length)<cutoffgrade and inorout == "in":
                 ## Once at the end of the run, it goes back to check if adding the row prior to the run (as long as it's greater than mingradecutoff%) keeps the entire run above grade) ##
@@ -78,6 +82,5 @@ for i in holes:
                 grade = 0
                 gradeton = 0
                 inorout = "out"
-
 print(results)
 print(problemholes)

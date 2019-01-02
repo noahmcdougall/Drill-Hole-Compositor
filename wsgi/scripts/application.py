@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import sys
 sys.stdout = sys.stderr
 import csv
@@ -89,19 +89,24 @@ class calculate:
                         if inorout == "out":
                             beginning = datatable[j][1]
                             iteratornum = j-1
+                            gobacklength = datatable[iteratornum][2]-datatable[iteratornum][1]
                         end = datatable[j][2]
                         inorout = "in"
                     ## If the row is below min cut off, check to see if either of the the next two rows are above before diluting the composite ##
-                elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade:
-                        if ((j+1) <= len(datatable) and datatable[j+1][0] == i and datatable[j+1][3] > mingradecutoff) or ((j+2) <= len(datatable) and datatable[j+2][0] == i and datatable[j+2][3] > mingradecutoff):
+                    elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade and inorout == "in":
+                        if (datatable[j+1][0] == i and datatable[j+1][3] > mingradecutoff) or (datatable[j+2][0] == i and datatable[j+2][3] > mingradecutoff):
                             grade = ((datatable[j][3]*length)+gradeton)/(runlength + length)
                             gradeton = grade * runlength
-                            if inorout == "out":
-                                beginning = datatable[j][1]
-                                iteratornum = j-1
                             end = datatable[j][2]
-                            inorout = "in"
 
+                    ## Closing run conditions ##
+                    ## Condition where the hole ends 'in' ore. ##
+                    if ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade and inorout == "in" and (datatable[j+1][0] != i):
+                        results.append({'Holeid' : i, 'From' : beginning, 'To' : end, 'RunLength' : runlength, 'Grade' : round(grade,2)})
+                        runlength = 0
+                        grade = 0
+                        gradeton = 0
+                        inorout = "out"
                     ## Condition where we get to the end of the first run and commit the results ##
                     if ((datatable[j][3]*length)+gradeton)/(runlength + length)<cutoffgrade and inorout == "in":
                         ## Once at the end of the run, it goes back to check if adding the row prior to the run (as long as it's greater than mingradecutoff) keeps the entire run above grade) ##
