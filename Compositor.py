@@ -74,6 +74,7 @@ for i in holes:
             elif datatable[j][3] < mingradecutoff and ((datatable[j][3]*length)+gradeton)/(runlength + length)>=cutoffgrade and inorout == "in":
                 if (datatable[jplusone][0] == i and datatable[jplusone][3] > mingradecutoff) or (datatable[jplustwo][0] == i and datatable[jplustwo][3] > mingradecutoff):
                     grade = ((datatable[j][3]*length)+gradeton)/(runlength + length)
+                    runlength = runlength + length
                     gradeton = grade * runlength
                     end = datatable[j][2]
                 else:
